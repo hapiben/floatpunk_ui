@@ -1,0 +1,182 @@
+<%# Every shared part of the balloon theme, in every state. Open this page in
+    each of the three sites after a theme change and compare them side by side. %>
+<div class="page">
+  <header class="site-head">
+    <%= render FloatpunkUi::SiteBrandComponent.new(site: :hangman, href: "#") %>
+    <details class="site-menu">
+      <summary>Menu</summary>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#" aria-current="page">Design</a>
+        <a href="#">Second link</a>
+        <a href="#">Third link</a>
+      </nav>
+    </details>
+  </header>
+
+  <main>
+    <section>
+      <p class="eyebrow">Design page</p>
+      <h1>Balloon theme v<%= FloatpunkUi::VERSION %></h1>
+      <p class="lede">Every shared part, in every state. Resize the window to see the phone layout and the mobile menu.</p>
+    </section>
+
+    <section aria-labelledby="scene-heading">
+      <h2 id="scene-heading">The scene</h2>
+      <p class="mb-3">The balloon's height shows how well you are doing. The buttons drive the Stimulus controller.</p>
+      <div class="board board-grid" data-controller="balloon" data-balloon-air-value="0.7">
+        <%= render FloatpunkUi::BalloonSceneComponent.new %>
+        <div class="play">
+          <div class="play-head">
+            <p class="stat-inline">Score <b>12</b></p>
+            <p class="lives"><span class="pips" aria-hidden="true"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip gone"></span><span class="pip gone"></span></span><span class="lives-text">3 lives left</span></p>
+          </div>
+          <div class="meter">
+            <div class="meter-bar"><div class="meter-fill"></div></div>
+            <p class="meter-text">700 m up · about 21 s of hot air left</p>
+          </div>
+          <div class="button-row">
+            <button type="button" class="btn" data-action="balloon#reset">Full air</button>
+            <button type="button" class="btn" data-action="balloon#boost">Boost</button>
+            <button type="button" class="btn" data-action="balloon#win">Win</button>
+            <button type="button" class="btn" data-action="balloon#lose">Lose</button>
+          </div>
+          <p class="feedback" data-tone="good">Nice one. That is the right word.</p>
+          <p class="feedback" data-tone="bad">Not that letter. The balloon sinks a little.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="pieces-heading">
+      <h2 id="pieces-heading">Game pieces</h2>
+      <h3 class="mt-3 mb-2">Tiles</h3>
+      <div class="word" aria-hidden="true">
+        <span class="tile filled">B</span><span class="tile filled">A</span><span class="tile hinted">L</span><span class="tile">&nbsp;</span><span class="tile good">O</span><span class="tile used">N</span>
+      </div>
+      <h3 class="mt-4 mb-2">Keys</h3>
+      <div class="keys">
+        <div class="key-row">
+          <button type="button" class="key hit">A</button>
+          <button type="button" class="key miss">B</button>
+          <button type="button" class="key">C</button>
+          <button type="button" class="key" disabled>D</button>
+        </div>
+      </div>
+      <h3 class="mt-4 mb-2">Buttons</h3>
+      <div class="button-row">
+        <button type="button" class="btn primary">Take off</button>
+        <button type="button" class="btn">Copy result</button>
+        <button type="button" class="btn" disabled>Disabled</button>
+        <button type="button" class="pill-btn">Hint <small>· costs air</small></button>
+        <button type="button" class="pill-btn" aria-pressed="true">Pressed</button>
+      </div>
+      <h3 class="mt-4 mb-2">Small balloons</h3>
+      <div class="d-flex gap-3 align-items-end">
+        <span style="width: 56px"><%= render FloatpunkUi::BalloonComponent.new %></span>
+        <span style="width: 56px"><%= render FloatpunkUi::BalloonComponent.new(colors: { a: "var(--stripe-d)", b: "var(--stripe-b)", c: "var(--stripe-e)" }) %></span>
+        <span style="width: 56px"><%= render FloatpunkUi::BalloonComponent.new(colors: { a: "var(--stripe-c)", b: "var(--cloud)", c: "var(--stripe-a)" }) %></span>
+      </div>
+    </section>
+
+    <section aria-labelledby="result-heading">
+      <h2 id="result-heading">The result card</h2>
+      <div class="result">
+        <p class="result-title">You made it!</p>
+        <p class="result-line">12 words in 90 seconds. The balloon floated off the top.</p>
+        <div class="button-row">
+          <button type="button" class="btn primary">Play again</button>
+          <button type="button" class="btn">Copy result</button>
+        </div>
+      </div>
+      <dl class="stats mt-3">
+        <div class="stat"><dt>Played</dt><dd>14</dd></div>
+        <div class="stat"><dt>Won</dt><dd>9</dd></div>
+        <div class="stat"><dt>Streak</dt><dd>3</dd></div>
+        <div class="stat"><dt>Best</dt><dd>7</dd></div>
+      </dl>
+      <div class="fact mt-3"><p><b>Did you know?</b> Hot air balloons fly because warm air is lighter than cold air.</p></div>
+    </section>
+
+    <section aria-labelledby="lists-heading">
+      <h2 id="lists-heading">Lists</h2>
+      <h3 class="mt-3 mb-2">Topics (hangman and word chain)</h3>
+      <ul class="topics">
+        <li><a href="#"><span class="topic-name">Animals</span><span class="topic-meta">12 words · land, sea and sky</span></a></li>
+        <li><a href="#"><span class="topic-name">Countries</span><span class="topic-meta">20 words</span></a></li>
+        <li><a href="#"><span class="topic-name">Food</span><span class="topic-meta">15 words</span></a></li>
+      </ul>
+      <h3 class="mt-4 mb-2">Game cards (Floatpunk)</h3>
+      <ul class="game-cards">
+        <li>
+          <a class="game-card" href="#">
+            <span class="game-card-art"><%= render FloatpunkUi::BalloonComponent.new(colors: { a: "var(--stripe-d)", b: "var(--stripe-b)", c: "var(--stripe-e)" }) %></span>
+            <span class="game-card-text">
+              <span class="game-card-tag">Words</span>
+              <h3>Word Scramble</h3>
+              <span class="game-card-desc">Put the mixed-up letters back in the right order.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="game-card" href="#">
+            <span class="game-card-art"><%= render FloatpunkUi::BalloonComponent.new %></span>
+            <span class="game-card-text">
+              <span class="game-card-tag">Numbers</span>
+              <h3>Math Pop</h3>
+              <span class="game-card-desc">Pop the balloon with the right answer.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="base-heading">
+      <h2 id="base-heading">Base styles</h2>
+      <div class="row">
+        <div class="col">
+          <form class="card">
+            <p class="card-title">A form</p>
+            <div class="mb-3">
+              <label for="design-name">Your name</label>
+              <input id="design-name" type="text" placeholder="Type here">
+              <p class="form-text">Shown on the leaderboard.</p>
+            </div>
+            <div class="mb-3">
+              <label for="design-topic">Topic</label>
+              <select id="design-topic"><option>Animals</option><option>Food</option></select>
+            </div>
+            <div class="mb-3">
+              <label for="design-bad">With an error</label>
+              <input id="design-bad" type="text" class="is-invalid" value="too short">
+              <p class="field-error">Must be at least 3 letters.</p>
+            </div>
+            <div class="form-check mb-3">
+              <input id="design-check" type="checkbox" checked>
+              <label for="design-check">Remember me</label>
+            </div>
+            <button type="button" class="btn primary">Save</button>
+          </form>
+        </div>
+        <div class="col d-flex flex-column gap-3">
+          <div class="alert notice">Saved. Your score is on the board.</div>
+          <div class="alert error">Something went wrong. Try again.</div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Player</th><th>Score</th></tr></thead>
+              <tbody>
+                <tr><td>Ben</td><td>120</td></tr>
+                <tr><td>Guest</td><td>95</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-muted small">Muted small text. <span class="badge">Badge</span></p>
+        </div>
+      </div>
+    </section>
+
+    <%= render FloatpunkUi::AdSlotComponent.new %>
+  </main>
+
+  <%= render FloatpunkUi::SiteFooterComponent.new(site: :hangman) do %>
+    <p>Footer text goes here.</p>
+  <% end %>
+</div>
