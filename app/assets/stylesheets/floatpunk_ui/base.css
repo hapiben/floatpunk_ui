@@ -147,11 +147,11 @@
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Heading sizes as classes, for when the HTML level and the look differ. */
-.h1 { font: 800 clamp(2rem, 5vw, 2.6rem)/1.1 var(--font-head); }
-.h2 { font: 800 1.6rem/1.2 var(--font-head); }
-.h3 { font: 700 1.3rem/1.25 var(--font-head); }
-.h4, .h5 { font: 700 1.1rem/1.3 var(--font-head); }
-.display-6 { font: 800 2.2rem/1.1 var(--font-head); }
+.h1 { font: 800 clamp(2rem, 5vw, 2.6rem)/1.1 var(--font-display); }
+.h2 { font: 800 1.6rem/1.2 var(--font-display); }
+.h3 { font: 700 1.3rem/1.25 var(--font-display); }
+.h4, .h5 { font: 700 1.1rem/1.3 var(--font-display); }
+.display-6 { font: 800 2.2rem/1.1 var(--font-display); }
 
 /* ---------- Forms ---------- */
 label,
@@ -234,7 +234,7 @@ legend { padding: 0; font-weight: 700; }
   border: 2px solid var(--card-edge);
   border-radius: 16px;
 }
-.card-title { margin: 0 0 8px; font: 700 1.2rem/1.2 var(--font-head); }
+.card-title { margin: 0 0 8px; font: 700 1.2rem/1.2 var(--font-display); }
 
 /* ---------- Mobile menu ----------
    Wrap .site-nav in <details class="site-menu"> with a <summary>Menu</summary>.

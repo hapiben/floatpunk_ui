@@ -1,0 +1,8 @@
+<% if by_floatpunk? %>
+  <div class="brand">
+    <a class="logo" href="<%= href %>"><%= name %></a>
+    <a class="logo-by" href="<%= floatpunk_url %>">by Floatpunk</a>
+  </div>
+<% else %>
+  <a class="logo" href="<%= href %>"><%= name %></a>
+<% end %>

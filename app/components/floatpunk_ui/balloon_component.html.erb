@@ -1,0 +1,14 @@
+<svg class="balloon-art" viewBox="44 10 112 146" aria-hidden="true"<% if style %> style="<%= style %>"<% end %>>
+  <defs>
+    <clipPath id="<%= clip_id %>"><path d="<%= ENVELOPE %>"></path></clipPath>
+  </defs>
+  <g clip-path="url(#<%= clip_id %>)">
+    <rect class="stripe-a" x="50" y="14" width="100" height="104"></rect>
+    <rect class="stripe-b" x="67" y="14" width="22" height="104"></rect>
+    <rect class="stripe-b" x="111" y="14" width="22" height="104"></rect>
+    <rect class="stripe-c" x="89" y="14" width="22" height="104"></rect>
+  </g>
+  <path class="outline" d="<%= ENVELOPE %>"></path>
+  <path class="rope" d="M89 118 L92 138 M111 118 L108 138"></path>
+  <rect class="basket" x="90" y="138" width="20" height="14" rx="3"></rect>
+</svg>

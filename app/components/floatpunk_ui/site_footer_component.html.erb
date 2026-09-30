@@ -1,0 +1,9 @@
+<footer class="site-foot">
+  <div class="more-games">
+    <span class="more-games-label">More from us:</span>
+    <% other_sites.each do |site| %>
+      <a href="<%= site[:url] %>"><%= site[:name] %> · <%= site[:tagline] %></a>
+    <% end %>
+  </div>
+  <%= content %>
+</footer>
