@@ -1,28 +1,108 @@
-# FloatpunkUi
-Short description and motivation.
+# floatpunk_ui
 
-## Usage
-How to use my plugin.
+The balloon theme shared by three sites: Floatpunk, Play Hangman and Play Word Chain.
+One copy of the CSS, the shared page parts and the balloon behaviour, so the three sites
+always match. Each app pins a version, so a theme change reaches one site at a time.
 
-## Installation
-Add this line to your application's Gemfile:
+In every game, **the balloon's height shows how well you are doing.** It sinks on mistakes
+or as time runs out, floats off the top on a win, and splashes into the sea on a loss.
 
-```ruby
-gem "floatpunk_ui"
+## What is in it
+
+```
+app/assets/stylesheets/floatpunk_ui/
+  balloon-theme.css     colour tokens, fonts, and the game parts (board, meter, tiles, keys, result card)
+  base.css              forms, alerts, tables, cards, the mobile menu, and helpers like mb-3 and d-flex
+app/assets/javascripts/floatpunk_ui/
+  balloon_controller.js Stimulus controller that moves the balloon
+app/components/floatpunk_ui/
+  balloon_scene_component   the sky, sea and balloon SVG (one per page)
+  balloon_component         one small balloon, for cards and lists
+  site_brand_component      the logo, with "by Floatpunk" on the other two sites
+  site_footer_component     the footer with "More from us" links
+  ad_slot_component         a fixed-size space for one ad
+app/helpers/floatpunk_ui/layout_helper.rb   font and stylesheet tags for <head>
+app/views/floatpunk_ui/design/show.html.erb  the design page
 ```
 
-And then execute:
-```bash
-$ bundle
+## Adding it to an app
+
+1. Gemfile. Pin a tag, never `main`:
+
+   ```ruby
+   gem "floatpunk_ui", git: "git@github.com:hapiben/floatpunk_ui.git", tag: "v0.5.0"
+   ```
+
+2. The layout's `<head>`:
+
+   ```erb
+   <%= floatpunk_font_tags %>
+   <%= floatpunk_stylesheet_tags %>
+   <%= javascript_importmap_tags %>
+   ```
+
+   Then the app's own stylesheet after those, for anything the theme does not cover.
+
+3. Register the balloon controller in `app/javascript/controllers/index.js`:
+
+   ```js
+   import BalloonController from "floatpunk_ui/balloon_controller"
+   application.register("balloon", BalloonController)
+   ```
+
+4. The design page, in `config/routes.rb`:
+
+   ```ruby
+   mount FloatpunkUi::Engine => "/design" if Rails.env.development?
+   ```
+
+## Using it in a page
+
+```erb
+<header class="site-head">
+  <%= render FloatpunkUi::SiteBrandComponent.new(site: :hangman, href: root_path) %>
+  <details class="site-menu">
+    <summary>Menu</summary>
+    <nav class="site-nav" aria-label="Main">…</nav>
+  </details>
+</header>
+
+<div class="board board-grid" data-controller="balloon" data-balloon-air-value="1">
+  <%= render FloatpunkUi::BalloonSceneComponent.new %>
+  <div class="play">…the game…</div>
+</div>
+
+<%= render FloatpunkUi::AdSlotComponent.new do %>
+  <%= render "ads/under_game" %>
+<% end %>
+
+<%= render FloatpunkUi::SiteFooterComponent.new(site: :hangman) %>
 ```
 
-Or install it yourself as:
-```bash
-$ gem install floatpunk_ui
+The site ids are `:floatpunk`, `:hangman` and `:word_chain`.
+
+From a game's own Stimulus controller, move the balloon through an outlet:
+
+```js
+static outlets = ["balloon"]
+this.balloonOutlet.airValue = 0.6   // 1 is the top of the sky, 0 is the sea
+this.balloonOutlet.boost()          // fire the burner for a moment
+this.balloonOutlet.win()            // float away
+this.balloonOutlet.lose()           // splash
 ```
 
-## Contributing
-Contribution directions go here.
+## Rules
 
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+- App CSS uses tokens like `var(--accent)`, never raw colours.
+- Ads go only in `AdSlotComponent`, away from game buttons.
+- Change the theme here, raise the version, tag it, then bump each app one at a time.
+
+## Working on the engine
+
+```
+bundle install
+bundle exec rspec     # renders the components through the tiny app in spec/dummy
+bin/rubocop
+```
+
+There is no database. `spec/dummy` is just enough Rails to render views.
