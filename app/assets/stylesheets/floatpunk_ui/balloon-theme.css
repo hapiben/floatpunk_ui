@@ -1,0 +1,1073 @@
+/* Balloon theme v0.5
+   v0.2 added game groups on the games list. v0.3 added the topic list used by hangman and word chain.
+   v0.4 added the small "by Floatpunk" line under the hangman and word chain logos.
+   v0.5 added the ad slot (placeholder boxes for AdSense), and moved into the floatpunk_ui engine.
+   Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
+   This file lives in the floatpunk_ui engine. Change it here, raise the version in
+   lib/floatpunk_ui/version.rb, tag a release, then bump the tag in each app one at a time.
+
+   Light mode is a sunny day. Dark mode is a sunset. Every colour comes from the tokens below.
+   The balloon's height always means "how well you are doing":
+     high = safe, splash in the sea = game over, flies off the top = you won. */
+:root {
+  --page: #eef7fb;
+  --card: #ffffff;
+  --card-edge: #cfe3ec;
+  --ink: #16364a;
+  --muted: #4f6e7f;
+  --accent: #0f7c70;
+  --accent-ink: #ffffff;
+  --bad: #c2401f;
+  --good: #0f7c70;
+  --slot: #e6f2f8;
+  --sky-top: #8fd0ee;
+  --sky-bottom: #e4f5fc;
+  --sun: #ffc94a;
+  --cloud: #ffffff;
+  --sea: #2f86c0;
+  --sea-light: #9fd6f2;
+  --splash: #1f6d9e;
+  --stripe-a: #ff7a59;
+  --stripe-b: #ffc94a;
+  --stripe-c: #2bb3a3;
+  --stripe-d: #7b8cff;
+  --stripe-e: #ff8fc2;
+  --outline: #16364a;
+  --basket: #a8683a;
+  --flame: #ff9a2e;
+  --focus: #1f6fd1;
+  --shadow: rgba(22, 54, 74, 0.14);
+  --font-display: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0f2133;
+    --card: #16304a;
+    --card-edge: #28486a;
+    --ink: #eaf4f8;
+    --muted: #a2bccb;
+    --accent: #3fd0bd;
+    --accent-ink: #0f2133;
+    --bad: #ff8b6b;
+    --good: #3fd0bd;
+    --slot: #1d3b59;
+    --sky-top: #25336a;
+    --sky-bottom: #f0a07e;
+    --sun: #ffb35c;
+    --cloud: #f5d3c7;
+    --sea: #1d4f7c;
+    --sea-light: #7fb8dc;
+    --splash: #7fb8dc;
+    --outline: #0f2133;
+    --basket: #c28353;
+    --focus: #8cc4ff;
+    --shadow: rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --page: #0f2133;
+  --card: #16304a;
+  --card-edge: #28486a;
+  --ink: #eaf4f8;
+  --muted: #a2bccb;
+  --accent: #3fd0bd;
+  --accent-ink: #0f2133;
+  --bad: #ff8b6b;
+  --good: #3fd0bd;
+  --slot: #1d3b59;
+  --sky-top: #25336a;
+  --sky-bottom: #f0a07e;
+  --sun: #ffb35c;
+  --cloud: #f5d3c7;
+  --sea: #1d4f7c;
+  --sea-light: #7fb8dc;
+  --splash: #7fb8dc;
+  --outline: #0f2133;
+  --basket: #c28353;
+  --focus: #8cc4ff;
+  --shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  background: var(--page);
+}
+
+body {
+  margin: 0;
+  padding-inline: 16px;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--font-body);
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Page frame ---------- */
+.page {
+  max-width: 1000px;
+  margin-inline: auto;
+  padding-block: 20px 56px;
+  display: grid;
+  gap: 32px;
+}
+
+.site-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+
+/* The logo always has a small striped balloon in front of the name. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font: 800 1.9rem/1 var(--font-display);
+  text-decoration: none;
+}
+
+.logo::before {
+  content: "";
+  width: 0.62em;
+  height: 0.75em;
+  border-radius: 50% 50% 45% 45%;
+  background: linear-gradient(90deg, var(--stripe-a) 0 33%, var(--stripe-b) 33% 66%, var(--stripe-c) 66%);
+}
+
+/* Hangtime and Last Letter: the logo with a small "by Floatpunk" line under it.
+   The line starts under the name, not under the little balloon. */
+.brand {
+  display: grid;
+  gap: 2px;
+}
+
+.logo-by {
+  padding-left: calc(1.9rem * 0.62 + 10px);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.logo-by:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.site-nav a {
+  padding: 6px 14px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.site-nav a:hover {
+  background: var(--slot);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+main {
+  display: grid;
+  gap: 52px;
+}
+
+.hero {
+  display: grid;
+  gap: 22px;
+}
+
+.intro {
+  display: grid;
+  gap: 6px;
+  max-width: 62ch;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font: 800 clamp(2.1rem, 6vw, 3.2rem)/1.05 var(--font-display);
+  text-wrap: balance;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font: 800 1.7rem/1.15 var(--font-display);
+  text-wrap: balance;
+}
+
+h3 {
+  margin: 0;
+  font: 800 1.3rem/1.2 var(--font-display);
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+/* ---------- The game card ---------- */
+.game {
+  display: grid;
+  gap: 14px;
+}
+
+.board {
+  padding: 24px;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 24px;
+  box-shadow: 0 16px 36px -24px var(--shadow);
+}
+
+/* Most games: the sky scene on the left, the game on the right.
+   On a phone the scene shrinks and sits next to .play-head, so the game stays near the top. */
+.board-grid {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 20px 32px;
+  align-items: start;
+}
+
+.board-grid > .scene {
+  grid-row: 1 / span 2;
+}
+
+.play {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.play-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
+@media (max-width: 680px) {
+  .board {
+    padding: 14px;
+  }
+  .board-grid {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 14px 16px;
+  }
+  .board-grid > .play {
+    display: contents;
+  }
+  .board-grid > .scene {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .board-grid .play-head {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+  }
+  .board-grid > .play > :not(.play-head) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- The sky scene (made by Kit.sceneSVG) ---------- */
+/* Set --air on .board from 0 (touching the sea) to 1 (top of the sky). */
+.scene svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sky-top { stop-color: var(--sky-top); }
+.sky-bottom { stop-color: var(--sky-bottom); }
+.sun { fill: var(--sun); }
+.cloud { fill: var(--cloud); }
+.sea { fill: var(--sea); }
+.stripe-a { fill: var(--a, var(--stripe-a)); }
+.stripe-b { fill: var(--b, var(--stripe-b)); }
+.stripe-c { fill: var(--c, var(--stripe-c)); }
+
+.outline {
+  fill: none;
+  stroke: var(--outline);
+  stroke-width: 2;
+}
+
+.rope {
+  fill: none;
+  stroke: var(--outline);
+  stroke-width: 1.5;
+}
+
+.person { fill: var(--outline); }
+
+.basket {
+  fill: var(--basket);
+  stroke: var(--outline);
+  stroke-width: 1.5;
+}
+
+.scene .balloon {
+  transform: translateY(calc((1 - var(--air, 1)) * 116px));
+  transition: transform 0.35s ease-out;
+}
+
+.bob {
+  animation: bob 3s ease-in-out infinite;
+}
+
+.flame {
+  fill: var(--flame);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scale(calc(0.35 + var(--air, 1) * 0.65));
+}
+
+/* Add .boost to .board for a moment (Kit.flash) to fire the burner. */
+.board.boost .flame {
+  animation: flare 0.6s ease-out;
+}
+
+.splash {
+  fill: none;
+  stroke: var(--sea-light);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.birds {
+  fill: none;
+  stroke: var(--outline);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 0.4s 0.6s;
+}
+
+/* .won on .board: the balloon floats off the top. .over: it lands in the sea. */
+.board.won .scene .balloon {
+  transform: translateY(-200px);
+  transition: transform 1.8s ease-in 0.2s;
+}
+
+.board.won .birds {
+  opacity: 1;
+}
+
+.board.over .scene .balloon {
+  transform: translateY(122px);
+}
+
+.board.over .bob {
+  animation: none;
+}
+
+.board.over .flame {
+  opacity: 0;
+}
+
+.board.over .splash {
+  opacity: 1;
+  transition: opacity 0.3s 0.4s;
+}
+
+/* A single balloon made by Kit.balloonSVG, for game cards and pop games. */
+.balloon-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- Status pieces ---------- */
+/* A big letter or number in a balloon shape. */
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.2em;
+  height: 2.2em;
+  padding-inline: 0.3em;
+  color: #16364a;
+  background: var(--stripe-b);
+  border-radius: 50% 50% 45% 45%;
+  font: 800 1.6rem/1 var(--font-display);
+}
+
+.stat-inline {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-inline b {
+  color: var(--ink);
+}
+
+/* The air meter. Its width follows --air. */
+.meter {
+  display: grid;
+  gap: 6px;
+}
+
+.meter-bar {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--slot);
+}
+
+.meter-fill {
+  width: calc(var(--air, 1) * 100%);
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.meter-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.board.low .meter-fill {
+  background: var(--bad);
+}
+
+.board.low .meter-text {
+  color: var(--bad);
+  font-weight: 700;
+}
+
+/* Small balloons for lives. Add .gone when a life is lost. */
+.pips {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.pip {
+  width: 11px;
+  height: 14px;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--stripe-a);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.pip:nth-child(3n + 2) { background: var(--stripe-b); }
+.pip:nth-child(3n + 3) { background: var(--stripe-c); }
+
+.pip.gone {
+  opacity: 0.2;
+  transform: translateY(3px) scale(0.8);
+}
+
+/* ---------- Controls ---------- */
+.btn {
+  min-height: 46px;
+  padding: 10px 20px;
+  color: var(--ink);
+  background: transparent;
+  border: 2px solid var(--card-edge);
+  border-radius: 999px;
+  font: 700 1rem var(--font-body);
+  cursor: pointer;
+}
+
+.btn.primary {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* A soft button for hints, passes and other extras. */
+.pill-btn {
+  min-height: 44px;
+  padding: 6px 18px;
+  color: var(--ink);
+  background: var(--slot);
+  border: 0;
+  border-radius: 999px;
+  font: 700 0.95rem var(--font-body);
+  cursor: pointer;
+}
+
+.pill-btn small {
+  color: var(--muted);
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.pill-btn:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.pill-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pill-btn[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.text-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 8px 14px;
+  color: var(--ink);
+  background: var(--slot);
+  border: 2px solid var(--card-edge);
+  border-radius: 14px;
+  font: 700 1.3rem var(--font-display);
+}
+
+.text-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* ---------- Letter tiles ---------- */
+.tile {
+  display: inline-grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.35em;
+  padding: 0.08em 0 0;
+  color: var(--ink);
+  background: var(--slot);
+  border: 0;
+  border-radius: 0.3em;
+  font: 800 clamp(1.3rem, 6vw, 2.1rem)/1 var(--font-display);
+}
+
+button.tile {
+  cursor: pointer;
+}
+
+button.tile:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.tile.filled {
+  animation: pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.tile.hinted {
+  color: #16364a;
+  background: var(--stripe-b);
+}
+
+.tile.good {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.tile.used {
+  opacity: 0.25;
+}
+
+/* ---------- On-screen keyboard ---------- */
+.keys {
+  display: grid;
+  gap: 7px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.key {
+  flex: none;
+  width: calc((100% - 54px) / 10);
+  max-width: 46px;
+  height: 50px;
+  padding: 0;
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 12px;
+  font: 700 1.2rem var(--font-display);
+  cursor: pointer;
+}
+
+.key:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.key:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.key.hit {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.key.miss {
+  color: var(--muted);
+  background: var(--slot);
+  border-color: var(--slot);
+  opacity: 0.6;
+}
+
+/* ---------- Messages and results ---------- */
+.feedback {
+  min-height: 1.6em;
+}
+
+.feedback[data-tone="bad"] {
+  color: var(--bad);
+}
+
+.feedback[data-tone="good"] {
+  color: var(--good);
+  font-weight: 700;
+}
+
+.shake {
+  animation: shake 0.35s;
+}
+
+.result {
+  display: grid;
+  gap: 10px;
+}
+
+.result-title {
+  font: 800 2.1rem/1.05 var(--font-display);
+  color: var(--accent);
+}
+
+.board.over .result-title {
+  color: var(--splash);
+}
+
+/* The "Did you know?" card. */
+.fact {
+  max-width: 60ch;
+  padding: 12px 16px;
+  background: var(--slot);
+  border-radius: 14px;
+}
+
+.share-fallback {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.share-fallback textarea {
+  width: 100%;
+  padding: 8px;
+  color: var(--ink);
+  background: var(--page);
+  border: 1px solid var(--card-edge);
+  border-radius: 8px;
+  font: 400 0.95rem var(--font-body);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0;
+  padding-inline: 8px;
+}
+
+.stat {
+  display: grid;
+}
+
+.stat dt {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stat dd {
+  margin: 0;
+  font: 800 1.6rem/1.1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Choosing a topic or level ---------- */
+.choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- Game cards (the games list) ---------- */
+.game-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 560px) {
+  .game-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .game-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.game-card {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  height: 100%;
+  padding: 20px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 22px;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.game-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.game-card:hover .balloon-art {
+  animation: bob 1.6s ease-in-out infinite;
+}
+
+.game-card-text {
+  display: grid;
+  gap: 4px;
+}
+
+.game-card-tag {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.game-card-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* A group of game cards with its own heading, for example "Word games". */
+.game-group {
+  display: grid;
+  gap: 14px;
+}
+
+.game-group h2 {
+  margin: 0;
+}
+
+.game-group .lede {
+  margin-top: -10px;
+}
+
+.more-all {
+  margin: -4px 0 14px;
+}
+
+.more-all a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- Topic lists (Hangtime and Last Letter) ---------- */
+/* Each topic gets a small balloon in front of its name, in one of the stripe colours. */
+.topics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .topics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.topics a {
+  display: grid;
+  gap: 2px;
+  height: 100%;
+  padding: 18px 20px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 20px;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.topics a:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.topic-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 800 1.5rem/1.15 var(--font-display);
+}
+
+.topic-name::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 17px;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--stripe-a);
+}
+
+.topics li:nth-child(3n + 2) .topic-name::before { background: var(--stripe-b); }
+.topics li:nth-child(3n + 3) .topic-name::before { background: var(--stripe-c); }
+
+.topic-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Links to the other topics, under a topic page's text. */
+.more-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.more-topics a {
+  padding: 8px 18px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 999px;
+}
+
+.more-topics a:hover {
+  border-color: var(--accent);
+}
+
+/* ---------- Text sections ---------- */
+.text-section {
+  max-width: 62ch;
+}
+
+.text-section ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.text-section li::marker {
+  color: var(--accent);
+}
+
+.text-section p + h2 {
+  margin-top: 32px;
+}
+
+/* ---------- Ad slots ---------- */
+/* A space saved for one ad, with a small label. The fixed height stops the page jumping
+   when the ad loads. For real ads, put the AdSense <ins class="adsbygoogle"> tag inside
+   .ad-box and delete the placeholder text.
+   Rules: never put a slot inside the game card or next to game buttons. Keep Auto ads,
+   anchor ads and vignette ads turned off in AdSense, so ads only appear in these slots. */
+.ad-slot {
+  display: grid;
+  gap: 6px;
+}
+
+.ad-label {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Phones get a 300 × 250 box. Wide screens get a 728 × 90 banner. */
+.ad-box {
+  display: grid;
+  place-items: center;
+  min-height: 250px;
+  overflow: hidden;
+  color: var(--muted);
+  background: var(--slot);
+  border: 2px dashed var(--card-edge);
+  border-radius: 16px;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 760px) {
+  .ad-box {
+    min-height: 90px;
+  }
+}
+
+/* ---------- Footer, with links to the sister sites ---------- */
+.site-foot {
+  display: grid;
+  gap: 14px;
+  padding-top: 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 2px solid var(--card-edge);
+}
+
+.more-games {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.more-games-label {
+  margin-right: 4px;
+  font-weight: 700;
+}
+
+.more-games a {
+  padding: 6px 14px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: 999px;
+}
+
+.more-games a:hover {
+  border-color: var(--accent);
+}
+
+/* ---------- Animations ---------- */
+@keyframes bob {
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes flare {
+  30% { transform: scale(2.2); }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
