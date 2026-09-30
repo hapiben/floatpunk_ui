@@ -15,6 +15,7 @@ app/assets/stylesheets/floatpunk_ui/
   base.css              forms, alerts, tables, cards, the mobile menu, and helpers like mb-3 and d-flex
 app/assets/javascripts/floatpunk_ui/
   balloon_controller.js Stimulus controller that moves the balloon
+  menu_controller.js    Stimulus controller for the mobile menu
 app/components/floatpunk_ui/
   balloon_scene_component   the sky, sea and balloon SVG (one per page)
   balloon_component         one small balloon, for cards and lists
@@ -43,11 +44,13 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
 
    Then the app's own stylesheet after those, for anything the theme does not cover.
 
-3. Register the balloon controller in `app/javascript/controllers/index.js`:
+3. Register the controllers in `app/javascript/controllers/index.js`:
 
    ```js
    import BalloonController from "floatpunk_ui/balloon_controller"
+   import MenuController from "floatpunk_ui/menu_controller"
    application.register("balloon", BalloonController)
+   application.register("menu", MenuController)
    ```
 
 4. The design page, in `config/routes.rb`:
@@ -61,10 +64,10 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
 ```erb
 <header class="site-head">
   <%= render FloatpunkUi::SiteBrandComponent.new(site: :hangman, href: root_path) %>
-  <details class="site-menu">
-    <summary>Menu</summary>
-    <nav class="site-nav" aria-label="Main">…</nav>
-  </details>
+  <div class="site-menu" data-controller="menu">
+    <button type="button" class="site-menu-toggle" data-action="menu#toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">…</nav>
+  </div>
 </header>
 
 <div class="board board-grid" data-controller="balloon" data-balloon-air-value="1">

@@ -12,5 +12,6 @@ RSpec.describe "Design page", type: :request do
     expect(response.body).to include("More from us:")
     expect(response.body).to include("floatpunk_ui/balloon-theme")
     expect(response.body).to include("floatpunk_ui/balloon_controller")
+    expect(response.body).to include("data-controller=\"menu\"")
   end
 end

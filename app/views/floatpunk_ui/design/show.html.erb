@@ -3,21 +3,21 @@
 <div class="page">
   <header class="site-head">
     <%= render FloatpunkUi::SiteBrandComponent.new(site: :hangman, href: "#") %>
-    <details class="site-menu">
-      <summary>Menu</summary>
-      <nav class="site-nav" aria-label="Main">
+    <div class="site-menu" data-controller="menu">
+      <button type="button" class="site-menu-toggle" data-action="menu#toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
         <a href="#" aria-current="page">Design</a>
         <a href="#">Second link</a>
         <a href="#">Third link</a>
       </nav>
-    </details>
+    </div>
   </header>
 
   <main>
     <section>
       <p class="eyebrow">Design page</p>
       <h1>Balloon theme v<%= FloatpunkUi::VERSION %></h1>
-      <p class="lede">Every shared part, in every state. Resize the window to see the phone layout and the mobile menu.</p>
+      <p class="lede">Every shared part, in every state. Make the window narrower than 720px to see the phone layout and the Menu button.</p>
     </section>
 
     <section aria-labelledby="scene-heading">

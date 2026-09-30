@@ -9,4 +9,5 @@ Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 - `base.css`: spacing, flex and text helpers with Bootstrap's names, forms, alerts, tables, cards and a mobile menu.
 - Components: `BalloonSceneComponent`, `BalloonComponent`, `SiteBrandComponent`, `SiteFooterComponent`, `AdSlotComponent`.
 - `balloon_controller.js`: a Stimulus controller that sets `--air` and the `won`, `over`, `boost` and `low` classes.
+- `menu_controller.js`: a Stimulus controller for the mobile menu.
 - A design page at the engine root, showing every part in every state.
