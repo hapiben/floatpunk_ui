@@ -1,0 +1,19 @@
+<%# The design page's own bare layout, so it never depends on the host app's layout
+    (hangman's needs sidebar data, for example). Just the theme's head tags and the page. %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Design · floatpunk_ui <%= FloatpunkUi::VERSION %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= floatpunk_theme_script_tag %>
+    <%= floatpunk_font_tags %>
+    <%= floatpunk_stylesheet_tags %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

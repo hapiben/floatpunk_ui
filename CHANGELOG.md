@@ -3,6 +3,13 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.7.0 (2026-10-10)
+
+- The page is 1200px wide on big screens (was 1000px). Hangman's board was squashed beside its sidebar.
+- The footer is a dark block with light text. Links underline only on hover.
+- Buttons fill on hover: plain ones go the slot colour, green ones go a little darker.
+- The design page has its own bare layout, so it works in any host app (hangman's layout needed sidebar data and broke it).
+
 ## 0.6.0 (2026-10-09)
 
 - Theme switch: `ThemeToggleComponent`, `theme_controller.js` and `floatpunk_theme_script_tag`. Auto follows the device; Light and Dark are saved in the browser.

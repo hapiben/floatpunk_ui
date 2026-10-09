@@ -1,8 +1,9 @@
-/* Balloon theme v0.6
+/* Balloon theme v0.7
    v0.2 added game groups on the games list. v0.3 added the topic list used by hangman and word chain.
    v0.4 added the small "by Floatpunk" line under the hangman and word chain logos.
    v0.5 added the ad slot (placeholder boxes for AdSense), and moved into the floatpunk_ui engine.
    v0.6 added the theme switch (Auto, Light, Dark) and the small .tag label.
+   v0.7 widened the page to 1200px, made the footer dark, and gave buttons a filled hover.
    Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
    This file lives in the floatpunk_ui engine. Change it here, raise the version in
    lib/floatpunk_ui/version.rb, tag a release, then bump the tag in each app one at a time.
@@ -38,6 +39,9 @@
   --flame: #ff9a2e;
   --focus: #1f6fd1;
   --shadow: rgba(22, 54, 74, 0.14);
+  --foot-bg: #16364a;
+  --foot-ink: #eaf4f8;
+  --foot-muted: #a2bccb;
   --font-display: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
   --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -66,6 +70,7 @@
     --basket: #c28353;
     --focus: #8cc4ff;
     --shadow: rgba(0, 0, 0, 0.4);
+    --foot-bg: #0a1829;
     color-scheme: dark;
   }
 }
@@ -92,6 +97,7 @@
   --basket: #c28353;
   --focus: #8cc4ff;
   --shadow: rgba(0, 0, 0, 0.4);
+  --foot-bg: #0a1829;
   color-scheme: dark;
 }
 
@@ -139,7 +145,7 @@ p {
 
 /* ---------- Page frame ---------- */
 .page {
-  max-width: 1000px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-block: 20px 56px;
   display: grid;
@@ -555,7 +561,13 @@ h3 {
 }
 
 .btn:hover:not(:disabled) {
+  background: var(--slot);
   border-color: var(--accent);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 82%, var(--ink));
+  border-color: color-mix(in srgb, var(--accent) 82%, var(--ink));
 }
 
 .btn:disabled {
@@ -1021,13 +1033,46 @@ button.tile:hover:not(:disabled) {
 }
 
 /* ---------- Footer, with links to the sister sites ---------- */
+/* A dark block at the end of the page. Links have no underline until hovered. */
 .site-foot {
   display: grid;
-  gap: 14px;
-  padding-top: 18px;
-  color: var(--muted);
+  gap: 16px;
+  padding: 24px;
+  color: var(--foot-muted);
   font-size: 0.9rem;
-  border-top: 2px solid var(--card-edge);
+  background: var(--foot-bg);
+  border-radius: 20px;
+}
+
+.site-foot a {
+  color: var(--foot-ink);
+  text-decoration: none;
+}
+
+.site-foot a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-foot h2,
+.site-foot h3,
+.site-foot h4,
+.site-foot .h3,
+.site-foot .h4,
+.site-foot .btn {
+  color: var(--foot-ink);
+}
+
+.site-foot .btn {
+  border-color: var(--foot-muted);
+}
+
+.site-foot .btn:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.site-foot .text-muted {
+  color: var(--foot-muted) !important;
 }
 
 .more-games {
