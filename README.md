@@ -16,12 +16,14 @@ app/assets/stylesheets/floatpunk_ui/
 app/assets/javascripts/floatpunk_ui/
   balloon_controller.js Stimulus controller that moves the balloon
   menu_controller.js    Stimulus controller for the mobile menu
+  theme_controller.js   Stimulus controller for the theme switch (Auto, Light, Dark)
 app/components/floatpunk_ui/
   balloon_scene_component   the sky, sea and balloon SVG (one per page)
   balloon_component         one small balloon, for cards and lists
   site_brand_component      the logo, with "by Floatpunk" on the other two sites
   site_footer_component     the footer with "More from us" links
   ad_slot_component         a fixed-size space for one ad
+  theme_toggle_component    the Auto / Light / Dark switch for the header
 app/helpers/floatpunk_ui/layout_helper.rb   font and stylesheet tags for <head>
 app/views/floatpunk_ui/design/show.html.erb  the design page
 ```
@@ -31,12 +33,13 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
 1. Gemfile. Pin a tag, never `main`:
 
    ```ruby
-   gem "floatpunk_ui", git: "git@github.com:hapiben/floatpunk_ui.git", tag: "v0.5.0"
+   gem "floatpunk_ui", git: "git@github.com:hapiben/floatpunk_ui.git", tag: "v0.6.0"
    ```
 
 2. The layout's `<head>`:
 
    ```erb
+   <%= floatpunk_theme_script_tag %>
    <%= floatpunk_font_tags %>
    <%= floatpunk_stylesheet_tags %>
    <%= javascript_importmap_tags %>
@@ -49,8 +52,10 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
    ```js
    import BalloonController from "floatpunk_ui/balloon_controller"
    import MenuController from "floatpunk_ui/menu_controller"
+   import ThemeController from "floatpunk_ui/theme_controller"
    application.register("balloon", BalloonController)
    application.register("menu", MenuController)
+   application.register("theme", ThemeController)
    ```
 
 4. The design page, in `config/routes.rb`:
@@ -67,6 +72,7 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
   <div class="site-menu" data-controller="menu">
     <button type="button" class="site-menu-toggle" data-action="menu#toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Main">…</nav>
+    <%= render FloatpunkUi::ThemeToggleComponent.new %>
   </div>
 </header>
 

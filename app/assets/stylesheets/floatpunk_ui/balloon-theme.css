@@ -1,7 +1,8 @@
-/* Balloon theme v0.5
+/* Balloon theme v0.6
    v0.2 added game groups on the games list. v0.3 added the topic list used by hangman and word chain.
    v0.4 added the small "by Floatpunk" line under the hangman and word chain logos.
    v0.5 added the ad slot (placeholder boxes for AdSense), and moved into the floatpunk_ui engine.
+   v0.6 added the theme switch (Auto, Light, Dark) and the small .tag label.
    Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
    This file lives in the floatpunk_ui engine. Change it here, raise the version in
    lib/floatpunk_ui/version.rb, tag a release, then bump the tag in each app one at a time.
@@ -443,6 +444,19 @@ h3 {
 
 /* ---------- Status pieces ---------- */
 /* A big letter or number in a balloon shape. */
+/* A small label that asks for attention, for example "New" on a topic. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  color: #16364a;
+  background: var(--stripe-b);
+  border-radius: 999px;
+  font: 800 0.75rem/1.6 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .badge {
   display: inline-grid;
   place-items: center;

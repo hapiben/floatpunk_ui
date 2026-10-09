@@ -12,6 +12,15 @@ module FloatpunkUi
       ], "\n")
     end
 
+    # Applies the reader's saved theme choice (light or dark) before the page paints,
+    # so there is no flash of the wrong colours. Put it in <head> before the stylesheets.
+    # With no saved choice the theme follows the device. See theme_controller.js.
+    def floatpunk_theme_script_tag
+      javascript_tag(nonce: true) do
+        'try{var t=localStorage.getItem("floatpunk-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}'.html_safe
+      end
+    end
+
     # The theme (tokens and game parts) and the base styles (forms, helpers, menu).
     def floatpunk_stylesheet_tags
       stylesheet_link_tag "floatpunk_ui/balloon-theme", "floatpunk_ui/base", "data-turbo-track": "reload"

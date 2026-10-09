@@ -236,11 +236,27 @@ legend { padding: 0; font-weight: 700; }
 }
 .card-title { margin: 0 0 8px; font: 700 1.2rem/1.2 var(--font-display); }
 
+/* Links that look like buttons. The theme styles <button> only. */
+a.btn,
+a.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 /* ---------- Mobile menu ----------
    Markup: <div class="site-menu" data-controller="menu"> with a .site-menu-toggle
-   button and the .site-nav inside. See menu_controller.js. The button only shows
-   on phones, and only once the controller has connected, so the nav is never
-   hidden from someone without JavaScript. */
+   button, the .site-nav and (optionally) the .theme-toggle inside. See
+   menu_controller.js. The Menu button only shows on phones, and only once the
+   controller has connected, so the nav is never hidden from someone without
+   JavaScript. */
+.site-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
 .site-menu-toggle {
   display: none;
   cursor: pointer;
@@ -253,9 +269,24 @@ legend { padding: 0; font-weight: 700; }
 }
 .site-menu.open > .site-menu-toggle { background: var(--slot); }
 
+/* The theme switch (Auto, Light, Dark). Hidden until theme_controller.js connects. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px 14px;
+  font: 700 0.95rem/1.4 var(--font-body);
+  color: var(--ink);
+  border: 2px solid var(--card-edge);
+  border-radius: 999px;
+  background: var(--card);
+}
+.theme-toggle:hover { border-color: var(--accent); }
+
 @media (max-width: 719px) {
   .site-menu[data-menu-ready] > .site-menu-toggle { display: inline-block; }
   .site-menu[data-menu-ready]:not(.open) > .site-nav { display: none; }
   .site-menu.open { flex-basis: 100%; }
-  .site-menu.open > .site-nav { padding-top: 10px; }
+  .site-menu.open > .site-nav { flex-basis: 100%; order: 1; padding-top: 10px; }
 }
