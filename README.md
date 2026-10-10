@@ -33,7 +33,7 @@ app/views/floatpunk_ui/design/show.html.erb  the design page
 1. Gemfile. Pin a tag, never `main`:
 
    ```ruby
-   gem "floatpunk_ui", git: "git@github.com:hapiben/floatpunk_ui.git", tag: "v0.8.1"
+   gem "floatpunk_ui", git: "https://github.com/hapiben/floatpunk_ui.git", tag: "v0.8.1"
    ```
 
 2. The layout's `<head>`:
