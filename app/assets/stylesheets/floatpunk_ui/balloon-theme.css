@@ -4,6 +4,7 @@
    v0.5 added the ad slot (placeholder boxes for AdSense), and moved into the floatpunk_ui engine.
    v0.6 added the theme switch (Auto, Light, Dark) and the small .tag label.
    v0.7 widened the page to 1200px, made the footer dark, and gave buttons a filled hover.
+   v0.8.1 added the segmented control (.segmented).
    v0.8 is the consistency pass: one type scale, one radius scale, one control height scale,
         AAA contrast in light mode, one link rule, three pill kinds (label, small control, button).
    Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
@@ -708,6 +709,43 @@ h3 {
 
 .pagy a[aria-disabled="true"] {
   opacity: 0.4;
+}
+
+/* A segmented control: one pill, two or more choices, the chosen one filled.
+   Links or buttons inside; mark the chosen one with aria-current="page" or aria-pressed="true". */
+.segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--card);
+  border: 2px solid var(--card-edge);
+  border-radius: var(--radius-pill);
+}
+
+.segmented > a,
+.segmented > button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  padding: 0 18px;
+  color: var(--ink);
+  font: 700 var(--text-md)/1.2 var(--font-body);
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.segmented > a:hover,
+.segmented > button:hover {
+  background: var(--slot);
+}
+
+.segmented > a[aria-current="page"],
+.segmented > button[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--accent);
 }
 
 /* Labels: a pill is a small number or fact, a tag asks for attention. */

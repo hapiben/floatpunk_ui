@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.1 (2026-10-10)
+
+- `.segmented`: one pill with two or more choices, the chosen one filled. Hangman's Popular / New switch uses it.
+
 ## 0.8.0 (2026-10-10)
 
 The consistency pass, after a design and accessibility audit of hangman.
