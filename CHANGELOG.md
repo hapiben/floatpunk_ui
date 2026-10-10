@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.2 (2026-10-11)
+
+- `SiteFooterComponent` takes `links: false` to leave out the "More from us" row. Floatpunk uses it, because its home page shows hangman and word chain as cards instead.
+
 ## 0.8.1 (2026-10-10)
 
 - `.segmented`: one pill with two or more choices, the chosen one filled. Hangman's Popular / New switch uses it.

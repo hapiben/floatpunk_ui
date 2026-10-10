@@ -10,6 +10,14 @@ RSpec.describe FloatpunkUi::SiteFooterComponent, type: :component do
     expect(page).to have_no_link(href: "https://playwordchain.com")
   end
 
+  it "leaves the links out when asked" do
+    render_inline(described_class.new(site: :floatpunk, links: false)) { "Scores stay here." }
+
+    expect(page).to have_no_css(".more-games")
+    expect(page).to have_no_link(href: "https://playhangman.org")
+    expect(page).to have_css("footer", text: "Scores stay here.")
+  end
+
   it "shows extra content under the links" do
     render_inline(described_class.new(site: :floatpunk)) { "Your scores stay in this browser." }
 
