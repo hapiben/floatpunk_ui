@@ -3,6 +3,17 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.0 (2026-10-10)
+
+The consistency pass, after a design and accessibility audit of hangman.
+
+- Scales as tokens: type (`--text-xs` 12px to `--text-2xl` 28px), radius (12 / 16 / 24), control heights (36 / 44 / 50). Every rule uses them.
+- AAA contrast in light mode: muted `#36505e`, accent `#0a5d54`, bad `#962f16`, footer muted `#b4cad6`. Dark mode muted `#bdd1dd` and bad `#ffa98f`.
+- One link rule: accent, underlined, 3px offset. Components still set their own.
+- Three pill kinds: labels (`.pill`, `.tag`), small controls (`.chip`, nav links, toggles, sister-site links, `.pagy a`), buttons (`.btn`, `.pill-btn`).
+- `.pills`, `.pill`, `.chip`, `.prose`, `.breadcrumb`, `.pagy` and `hr` move in from hangman.
+- h2 is 24px (was 27), h3 20px, buttons 44px (was 46), game and topic cards use the card radius and 16px padding.
+
 ## 0.7.0 (2026-10-10)
 
 - The page is 1200px wide on big screens (was 1000px). Hangman's board was squashed beside its sidebar.

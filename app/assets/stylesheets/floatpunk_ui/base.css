@@ -131,8 +131,8 @@
 .text-accent { color: var(--accent) !important; }
 .text-bad { color: var(--bad) !important; }
 .text-good { color: var(--good) !important; }
-.small { font-size: 0.875rem; }
-.lead { font-size: 1.2rem; }
+.small { font-size: var(--text-sm); }
+.lead { font-size: var(--text-lg); }
 .fw-bold { font-weight: 800 !important; }
 .fw-semibold { font-weight: 700 !important; }
 .fw-normal { font-weight: 400 !important; }
@@ -142,16 +142,33 @@
 .list-inline { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .border-top { border-top: 1px solid var(--card-edge) !important; }
 .border-bottom { border-bottom: 1px solid var(--card-edge) !important; }
-.rounded { border-radius: 12px !important; }
+.rounded { border-radius: var(--radius-sm) !important; }
 .w-100 { width: 100% !important; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Heading sizes as classes, for when the HTML level and the look differ. */
-.h1 { font: 800 clamp(2rem, 5vw, 2.6rem)/1.1 var(--font-display); }
-.h2 { font: 800 1.6rem/1.2 var(--font-display); }
-.h3 { font: 700 1.3rem/1.25 var(--font-display); }
-.h4, .h5 { font: 700 1.1rem/1.3 var(--font-display); }
-.display-6 { font: 800 2.2rem/1.1 var(--font-display); }
+.h1 { font: 800 clamp(2.1rem, 6vw, 3.2rem)/1.05 var(--font-display); }
+.h2 { font: 800 var(--text-xl)/1.15 var(--font-display); }
+.h3 { font: 800 var(--text-lg)/1.2 var(--font-display); }
+.h4, .h5 { font: 800 var(--text-md)/1.3 var(--font-display); }
+.display-6 { font: 800 var(--text-2xl)/1.1 var(--font-display); }
+
+/* Prose pages (about, terms, FAQs): paragraphs and lists get room again. */
+.prose p,
+.prose ul,
+.prose ol { margin-bottom: 1em; }
+.prose h2,
+.prose h3,
+.prose h4 { margin-top: 1.4em; }
+.prose li::marker { color: var(--accent); }
+
+/* Breadcrumbs: muted links, the current page in ink. */
+.breadcrumb ul,
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 4px 8px; margin: 0; padding: 0; list-style: none; font-size: var(--text-sm); }
+.breadcrumb li + li::before { content: "›"; margin-right: 8px; color: var(--muted); }
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb li:last-child a { color: var(--ink); font-weight: 700; }
 
 /* ---------- Forms ---------- */
 label,
@@ -167,12 +184,13 @@ textarea,
 .form-control {
   display: block;
   width: 100%;
-  padding: 10px 14px;
+  min-height: var(--control-md);
+  padding: 8px 14px;
   font: inherit;
   color: var(--ink);
   background: var(--card);
   border: 2px solid var(--card-edge);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
 }
 
 input:focus-visible,
@@ -184,14 +202,14 @@ textarea:focus-visible {
 
 textarea { min-height: 6rem; resize: vertical; }
 
-.form-text { margin-top: 4px; font-size: 0.875rem; color: var(--muted); }
+.form-text { margin-top: 4px; font-size: var(--text-sm); color: var(--muted); }
 
 .form-check { display: flex; align-items: center; gap: 8px; }
 .form-check label { margin: 0; font-weight: 400; }
 .form-check input { width: 1.1rem; height: 1.1rem; accent-color: var(--accent); }
 
 .field-error,
-.invalid-feedback { margin-top: 4px; font-size: 0.875rem; color: var(--bad); }
+.invalid-feedback { margin-top: 4px; font-size: var(--text-sm); color: var(--bad); }
 .is-invalid { border-color: var(--bad) !important; }
 
 .field_with_errors { display: contents; }
@@ -203,7 +221,7 @@ legend { padding: 0; font-weight: 700; }
 .alert {
   padding: 12px 16px;
   border: 2px solid var(--card-edge);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--card);
 }
 .alert.success,
@@ -224,7 +242,7 @@ legend { padding: 0; font-weight: 700; }
   text-align: left;
   border-bottom: 1px solid var(--card-edge);
 }
-.table th { font-weight: 700; color: var(--muted); font-size: 0.9rem; }
+.table th { font-weight: 700; color: var(--muted); font-size: var(--text-sm); }
 .table-wrap { overflow-x: auto; }
 
 /* ---------- Cards ---------- */
@@ -232,9 +250,9 @@ legend { padding: 0; font-weight: 700; }
   padding: 16px;
   background: var(--card);
   border: 2px solid var(--card-edge);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
 }
-.card-title { margin: 0 0 8px; font: 700 1.2rem/1.2 var(--font-display); }
+.card-title { margin: 0 0 8px; font: 800 var(--text-lg)/1.2 var(--font-display); }
 
 /* Links that look like buttons. The theme styles <button> only. */
 a.btn,
@@ -257,35 +275,16 @@ a.pill-btn {
   gap: 8px;
 }
 
+/* The Menu button's size and shape come from the small-control rule in balloon-theme.css. */
 .site-menu-toggle {
   display: none;
-  cursor: pointer;
-  padding: 6px 14px;
-  font: 700 0.95rem/1.4 var(--font-body);
-  color: var(--ink);
-  border: 2px solid var(--card-edge);
-  border-radius: 999px;
-  background: var(--card);
 }
 .site-menu.open > .site-menu-toggle { background: var(--slot); }
 
-/* The theme switch (Auto, Light, Dark). Hidden until theme_controller.js connects. */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  padding: 6px 14px;
-  font: 700 0.95rem/1.4 var(--font-body);
-  color: var(--ink);
-  border: 2px solid var(--card-edge);
-  border-radius: 999px;
-  background: var(--card);
-}
-.theme-toggle:hover { border-color: var(--accent); }
+/* The theme switch (Auto, Light, Dark) is a small control too. Hidden until theme_controller.js connects. */
 
 @media (max-width: 719px) {
-  .site-menu[data-menu-ready] > .site-menu-toggle { display: inline-block; }
+  .site-menu[data-menu-ready] > .site-menu-toggle { display: inline-flex; }
   .site-menu[data-menu-ready]:not(.open) > .site-nav { display: none; }
   .site-menu.open { flex-basis: 100%; }
   .site-menu.open > .site-nav { flex-basis: 100%; order: 1; padding-top: 10px; }
