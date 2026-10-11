@@ -3,6 +3,11 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.3 (2026-10-11)
+
+- `.with-sidebar`: content on the left, a 300px column on the right, stacked below 900px. The sidebar's last box is sticky. Moved in from hangman's CSS, with a fixed 300px column instead of 2fr / 1fr.
+- `AdSlotComponent` takes `size: :side` (300 × 250) or `size: :tall` (300 × 600) for the sidebar.
+
 ## 0.8.2 (2026-10-11)
 
 - `SiteFooterComponent` takes `links: false` to leave out the "More from us" row. Floatpunk uses it, because its home page shows hangman and word chain as cards instead.

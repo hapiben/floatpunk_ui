@@ -179,8 +179,19 @@
       </div>
     </section>
 
-    <%= render FloatpunkUi::AdSlotComponent.new %>
-  </main>
+  <%= render FloatpunkUi::AdSlotComponent.new %>
+
+  <section class="with-sidebar" aria-label="Page with a sidebar">
+    <div class="text-section">
+      <h2>Page with a sidebar</h2>
+      <p>The content sits on the left. The 300px column on the right holds ads and short lists. Below 900px it drops under the content, and its last box sticks while the page scrolls.</p>
+    </div>
+    <aside>
+      <%= render FloatpunkUi::AdSlotComponent.new(size: :side) %>
+      <%= render FloatpunkUi::AdSlotComponent.new(size: :tall) %>
+    </aside>
+  </section>
+</main>
 
   <%= render FloatpunkUi::SiteFooterComponent.new(site: :hangman) do %>
     <p>Footer text goes here.</p>
