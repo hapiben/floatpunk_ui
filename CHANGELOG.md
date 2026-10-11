@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.6 (2026-10-11)
+
+- `.more-all`: sits 12px under the cards (the same gap a heading leaves) and adds nothing below, so the 52px section gap stays even. It used to pull up 4px into the cards and add 14px after.
+
 ## 0.8.5 (2026-10-11)
 
 - `.more-all`: the "See all" link under a row of cards is centred.
