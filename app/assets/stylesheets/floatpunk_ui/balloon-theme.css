@@ -7,7 +7,7 @@
    v0.8.1 added the segmented control (.segmented).
    v0.8.3 added the page sidebar (.with-sidebar) and ad slot sizes (.ad-box.side, .ad-box.tall).
    v0.8.4 added .scene-col: the scene with the player's record (.stats tiles) under it.
-   v0.8.5 centres the "see all" link (.more-all) under a row of cards. v0.8.6 spaces it like a heading (12px).
+   v0.8.5 centres the "see all" link (.more-all) under a row of cards. v0.8.6/v0.8.7: lists push the next thing down 12px (margin-bottom), the link has no margin.
    v0.8 is the consistency pass: one type scale, one radius scale, one control height scale,
         AAA contrast in light mode, one link rule, three pill kinds (label, small control, button).
    Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
@@ -734,6 +734,10 @@ h3 {
   gap: 6px;
 }
 
+.pagy:not(:last-child) {
+  margin-bottom: 12px;
+}
+
 .pagy a {
   min-width: var(--control-sm);
   justify-content: center;
@@ -1011,6 +1015,11 @@ button.tile:hover:not(:disabled) {
   list-style: none;
 }
 
+/* Spacing runs downward: a list that has something after it (a "See all" link) pushes it down 12px, like a heading does. */
+.game-cards:not(:last-child) {
+  margin-bottom: 12px;
+}
+
 @media (min-width: 560px) {
   .game-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1080,7 +1089,7 @@ button.tile:hover:not(:disabled) {
 }
 
 .more-all {
-  margin: 12px 0 0;
+  margin: 0;
   text-align: center;
 }
 
