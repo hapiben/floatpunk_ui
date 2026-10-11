@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.4 (2026-10-11)
+
+- `.scene-col`: wrap the scene and a `<dl class="stats">` in it, and the player's record (Best, Played) shows as two tiles under the balloon. On a phone the tiles drop to the bottom of the board.
+
 ## 0.8.3 (2026-10-11)
 
 - `.with-sidebar`: content on the left, a 300px column on the right, stacked below 900px. The sidebar's last box is sticky. Moved in from hangman's CSS, with a fixed 300px column instead of 2fr / 1fr.

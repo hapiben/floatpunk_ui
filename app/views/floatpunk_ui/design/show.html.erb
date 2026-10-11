@@ -181,6 +181,24 @@
 
   <%= render FloatpunkUi::AdSlotComponent.new %>
 
+  <section class="board board-grid" aria-label="Board with the player's record">
+    <div class="scene-col">
+      <%= render FloatpunkUi::BalloonSceneComponent.new %>
+      <dl class="stats">
+        <div class="stat"><dt>Best time</dt><dd>1:32</dd></div>
+        <div class="stat"><dt>Played</dt><dd>4</dd></div>
+      </dl>
+    </div>
+    <div class="play">
+      <div class="play-head">
+        <p class="stat-inline">Topic <b>Animals</b></p>
+        <p class="stat-inline">Found <b>3 of 8</b></p>
+        <p class="stat-inline">Time <b>0:41</b></p>
+      </div>
+      <p>A board with <code>.scene-col</code>: the scene, with the player's record under it. On a phone the record drops to the bottom of the board.</p>
+    </div>
+  </section>
+
   <section class="with-sidebar" aria-label="Page with a sidebar">
     <div class="text-section">
       <h2>Page with a sidebar</h2>
