@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.9.2 (2026-10-11)
+
+- `.pill-btn` gets `gap: 0.3em`. As an inline-flex box it dropped the space before its `<small>` note, so "Hint · costs air" showed as "Hint· costs air".
+
 ## 0.9.1 (2026-10-11)
 
 - `AdSlotComponent` renders a `<div class="ad-slot">`, not an `<aside aria-label="Advertisement">`. An ad is not a landmark. With several on a page, or one inside a sidebar `<aside>`, axe reported nested and duplicate landmarks.

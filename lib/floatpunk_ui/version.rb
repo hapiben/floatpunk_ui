@@ -1,4 +1,4 @@
 module FloatpunkUi
   # Matches the balloon theme version. Raise both together.
-  VERSION = "0.9.1"
+  VERSION = "0.9.2"
 end
