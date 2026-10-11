@@ -3,6 +3,16 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.9.0 (2026-10-11)
+
+One spacing rhythm for every site, taken from hangman's helper classes. Every page moves a few pixels.
+
+- `main` gap 52px → 48px (same as `.mb-5`).
+- `h2`, `.lede:not(:last-child)`, `.game-cards:not(:last-child)`, `.pagy:not(:last-child)`: margin-bottom 12px → 16px (same as `.mb-3`).
+- `.intro` gap 6px → 4px, and `.intro h1` gets margin-bottom 4px, so label → h1 is 4px and h1 → lede is 8px.
+- `.hero` gap 22px → 24px (same as `.mb-4`). A breadcrumb goes inside `.hero`, before `.intro`.
+- `.text-section p + h2 { margin-top }` is now `p:has(+ h2) { margin-bottom }`. Spacing always runs downward.
+
 ## 0.8.8 (2026-10-11)
 
 - `.game-group` is no longer a grid, and `.game-group .lede` no longer pulls up with a negative margin-top. Instead `.lede:not(:last-child)` has `margin-bottom: 12px`, so a heading, a lede and a list sit 12px apart, the same as everywhere else.

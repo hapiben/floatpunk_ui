@@ -1,4 +1,6 @@
-/* Balloon theme v0.8
+/* Balloon theme v0.9
+   v0.9.0 is one spacing rhythm for every site, taken from hangman: 48px between sections, 16px under a heading,
+   a lede or a list, 4px label to h1 and 8px h1 to lede. Spacing always runs downward (margin-bottom).
    v0.2 added game groups on the games list. v0.3 added the topic list used by hangman and word chain.
    v0.4 added the small "by Floatpunk" line under the hangman and word chain logos.
    v0.5 added the ad slot (placeholder boxes for AdSense), and moved into the floatpunk_ui engine.
@@ -258,20 +260,25 @@ hr {
   background: var(--accent);
 }
 
+/* One rhythm for every site: 48px between sections, 16px between the things inside one. */
 main {
   display: grid;
-  gap: 52px;
+  gap: 48px;
 }
 
 .hero {
   display: grid;
-  gap: 22px;
+  gap: 24px;
 }
 
 .intro {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   max-width: 62ch;
+}
+
+.intro h1 {
+  margin-bottom: 4px;
 }
 
 .eyebrow {
@@ -289,7 +296,7 @@ h1 {
 }
 
 h2 {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   font: 800 var(--text-xl)/1.15 var(--font-display);
   text-wrap: balance;
 }
@@ -306,7 +313,7 @@ h3 {
 
 /* A lede with something after it (a list of cards) pushes it down 12px, the same as a heading. */
 .lede:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 /* ---------- The game card ---------- */
@@ -741,7 +748,7 @@ h3 {
 }
 
 .pagy:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .pagy a {
@@ -1023,7 +1030,7 @@ button.tile:hover:not(:disabled) {
 
 /* Spacing runs downward: a list that has something after it (a "See all" link) pushes it down 12px, like a heading does. */
 .game-cards:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 @media (min-width: 560px) {
@@ -1174,8 +1181,8 @@ button.tile:hover:not(:disabled) {
   color: var(--accent);
 }
 
-.text-section p + h2 {
-  margin-top: 32px;
+.text-section p:has(+ h2) {
+  margin-bottom: 32px;
 }
 
 /* ---------- Ad slots ---------- */
