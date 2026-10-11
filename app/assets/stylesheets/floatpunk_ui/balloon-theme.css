@@ -1,4 +1,5 @@
 /* Balloon theme v0.9
+   v0.9.1 draws the ad slot as a plain div, not an <aside> landmark.
    v0.9.0 is one spacing rhythm for every site, taken from hangman: 48px between sections, 16px under a heading,
    a lede or a list, 4px label to h1 and 8px h1 to lede. Spacing always runs downward (margin-bottom).
    v0.2 added game groups on the games list. v0.3 added the topic list used by hangman and word chain.

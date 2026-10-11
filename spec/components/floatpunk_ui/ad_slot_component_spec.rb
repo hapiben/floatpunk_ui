@@ -4,7 +4,8 @@ RSpec.describe FloatpunkUi::AdSlotComponent, type: :component do
   it "shows a placeholder when there is no ad" do
     render_inline(described_class.new)
 
-    expect(page).to have_css("aside.ad-slot[aria-label='Advertisement'] p.ad-label", text: "Advertisement")
+    expect(page).to have_css("div.ad-slot p.ad-label", text: "Advertisement")
+    expect(page).not_to have_css("aside")
     expect(page).to have_css(".ad-box", text: "Ad space")
   end
 

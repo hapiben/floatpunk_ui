@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.9.1 (2026-10-11)
+
+- `AdSlotComponent` renders a `<div class="ad-slot">`, not an `<aside aria-label="Advertisement">`. An ad is not a landmark. With several on a page, or one inside a sidebar `<aside>`, axe reported nested and duplicate landmarks.
+
 ## 0.9.0 (2026-10-11)
 
 One spacing rhythm for every site, taken from hangman's helper classes. Every page moves a few pixels.

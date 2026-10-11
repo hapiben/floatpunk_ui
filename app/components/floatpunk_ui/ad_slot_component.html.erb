@@ -1,4 +1,5 @@
-<aside class="ad-slot" aria-label="<%= label %>">
+<%# A plain box, not an <aside>: an ad is not a landmark, and a page has several of them. %>
+<div class="ad-slot">
   <p class="ad-label"><%= label %></p>
   <div class="<%= box_class %>"><%= content.presence || "Ad space" %></div>
-</aside>
+</div>
