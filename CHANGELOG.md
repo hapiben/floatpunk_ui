@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.8 (2026-10-11)
+
+- `.game-group` is no longer a grid, and `.game-group .lede` no longer pulls up with a negative margin-top. Instead `.lede:not(:last-child)` has `margin-bottom: 12px`, so a heading, a lede and a list sit 12px apart, the same as everywhere else.
+
 ## 0.8.7 (2026-10-11)
 
 - Spacing runs downward. `.more-all` has no margin. `.game-cards` and `.pagy` get `margin-bottom: 12px` when something follows them. Ben's rule: use margin-bottom, margin-top is hard to keep in order.
