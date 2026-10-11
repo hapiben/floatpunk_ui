@@ -6,6 +6,7 @@
    v0.7 widened the page to 1200px, made the footer dark, and gave buttons a filled hover.
    v0.8.1 added the segmented control (.segmented).
    v0.8.3 added the page sidebar (.with-sidebar) and ad slot sizes (.ad-box.side, .ad-box.tall).
+   v0.8.4 added .scene-col: the scene with the player's record (.stats tiles) under it.
    v0.8 is the consistency pass: one type scale, one radius scale, one control height scale,
         AAA contrast in light mode, one link rule, three pill kinds (label, small control, button).
    Shared by all three sites: Floatpunk, Play Hangman and Play Word Chain.
@@ -324,8 +325,31 @@ h3 {
   align-items: start;
 }
 
-.board-grid > .scene {
+.board-grid > .scene,
+.board-grid > .scene-col {
   grid-row: 1 / span 2;
+}
+
+/* The scene with the player's record under it: two small tiles, Best and Played.
+   Wrap the scene and a <dl class="stats"> in .scene-col. */
+.scene-col {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.scene-col > .stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+}
+
+.scene-col > .stats .stat {
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--slot);
+  border-radius: var(--radius-sm);
 }
 
 .play {
@@ -366,6 +390,18 @@ h3 {
   }
   .board-grid > .play > :not(.play-head) {
     grid-column: 1 / -1;
+  }
+  /* The scene sits beside the facts, and the record tiles drop to the bottom of the board. */
+  .board-grid > .scene-col {
+    display: contents;
+  }
+  .board-grid > .scene-col > .scene {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .board-grid > .scene-col > .stats {
+    grid-column: 1 / -1;
+    order: 1;
   }
 }
 
