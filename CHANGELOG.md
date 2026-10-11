@@ -3,6 +3,10 @@
 Raise the version in `lib/floatpunk_ui/version.rb` and the comment at the top of
 `balloon-theme.css` together. Tag the release, then bump the tag in each app one at a time.
 
+## 0.8.5 (2026-10-11)
+
+- `.more-all`: the "See all" link under a row of cards is centred.
+
 ## 0.8.4 (2026-10-11)
 
 - `.scene-col`: wrap the scene and a `<dl class="stats">` in it, and the player's record (Best, Played) shows as two tiles under the balloon. On a phone the tiles drop to the bottom of the board.
