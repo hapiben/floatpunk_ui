@@ -8,7 +8,7 @@ gem "puma"
 gem "propshaft"
 
 group :development, :test do
-  gem "rspec-rails", "~> 8.0"
+  gem "rspec-rails", "~> 8.1"
   gem "capybara"
   gem "rubocop-rails-omakase", require: false
 end
